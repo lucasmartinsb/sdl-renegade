@@ -10,7 +10,7 @@ class Wheel
 {
     public:
         Wheel();
-        Wheel(Point c, int radius, int degrees, Color color);
+        Wheel(Point c, int radius, int wheelRotation, Color color);
         void setPixel(int x, int y, int r, int g, int b);
         void draw();
         virtual ~Wheel();
@@ -20,12 +20,12 @@ class Wheel
     private:
         Point c;
         Color color;
-        int degrees;
+        int wheelRotation;
         int radius;
         void setPixel(int x, int y, int r, int g, int b, int a);
         void setPixel(int x, int y, Color color);
         void setPixel(int x, int y, Uint32 cor);
-        double toRadians(int degrees);
+        double toRadians(int wheelRotation);
         Line raio(double plusAngle);
 };
 

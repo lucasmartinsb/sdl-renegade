@@ -15,10 +15,10 @@ Wheel::~Wheel()
     //dtor
 }
 
-Wheel::Wheel(Point c, int radius, int degrees, Color color) {
+Wheel::Wheel(Point c, int radius, int wheelRotation, Color color) {
     this->c = c;
     this->radius = radius;
-    this->degrees = degrees;
+    this->wheelRotation = wheelRotation;
     this->color = color;
 }
 
@@ -55,7 +55,6 @@ void Wheel::draw() {
     Line raio2 = this->raio(this->toRadians(45));
     Line raio3 = this->raio(this->toRadians(90));
     Line raio4 = this->raio(this->toRadians(135));
-    Line raio5 = this->raio(this->toRadians(270));
 
     Circle circulo = Circle(this->c, this->radius, this->color);
 
@@ -64,7 +63,6 @@ void Wheel::draw() {
     raio2.draw();
     raio3.draw();
     raio4.draw();
-    raio5.draw();
 }
 
 Line Wheel::raio(double plusAngle) {
@@ -80,7 +78,7 @@ Line Wheel::raio(double plusAngle) {
     int centerY = this->c.getY();
 
     // Ângulo em radianos
-    double angle = this->toRadians(this->degrees) + plusAngle;
+    double angle = this->toRadians(this->wheelRotation) + plusAngle;
 
      // Rotaciona os pontos ao redor do centro usando transformações de rotação
     int rotatedX1 = centerX + (x1 - centerX) * cos(angle) - (y1 - centerY) * sin(angle);

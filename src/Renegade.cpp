@@ -15,16 +15,16 @@ Renegade::~Renegade()
     //dtor
 }
 
-Renegade::Renegade(Point start, int degrees, Color color) {
+Renegade::Renegade(Point start, int wheelRotation, Color color) {
     this->start = start;
-    this->degrees = degrees;
+    this->wheelRotation = wheelRotation;
     this->color = color;
     this->antialias = 0;
 }
 
-Renegade::Renegade(Point start, int degrees, Color color, int antialias) {
+Renegade::Renegade(Point start, int wheelRotation, Color color, int antialias) {
     this->start = start;
-    this->degrees = degrees;
+    this->wheelRotation = wheelRotation;
     this->color = color;
     this->antialias = antialias;
 }
@@ -49,11 +49,11 @@ void Renegade::draw() {
 
     // Roda traseira
     Point pCenterWheel1 = Point(this->start.getX()+80, this->start.getY()-30);
-    Wheel wheel1 = Wheel(pCenterWheel1, 30, this->degrees, this->color);
+    Wheel wheel1 = Wheel(pCenterWheel1, 30, this->wheelRotation, this->color);
 
     // Roda dianteira
     Point pCenterWheel2 = Point(this->start.getX()+300, this->start.getY()-30);
-    Wheel wheel2 = Wheel(pCenterWheel2, 30, this->degrees+60, this->color);
+    Wheel wheel2 = Wheel(pCenterWheel2, 30, this->wheelRotation+60, this->color);
 
     wheel1.draw();
     wheel2.draw();

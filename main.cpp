@@ -15,25 +15,25 @@ SDL_Window* pWindow = nullptr;
 SDL_Renderer* pRenderer = nullptr;
 SDL_Surface * window_surface = nullptr;
 
-int degrees = 10; // Usado para o ângulo da roda
-int offset = 20;  // Usado para a posição do Renegade
+int wheelRotation = 10;   // Usado para o ângulo da roda
+int renegadeOffset = 20;  // Usado para a posição do Renegade
 
 void display() {
     Color color = Color(0,0,0);
-    Point p1 = Point(offset,300);
+    Point p1 = Point(renegadeOffset,300);
 
-    Renegade renegade = Renegade(p1, degrees, color);
+    Renegade renegade = Renegade(p1, wheelRotation, color);
     renegade.draw();
 
-	offset+=5;
-	degrees+=10;
+	renegadeOffset+=5;
+	wheelRotation+=10;
 
-	if(offset==250){
-		offset = 20;
+	if(renegadeOffset==250){
+		renegadeOffset = 20;
 	}
 
-	if(degrees==360) {
-		degrees = 0;
+	if(wheelRotation==360) {
+		wheelRotation = 0;
 	}
 }
 
