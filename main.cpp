@@ -15,8 +15,8 @@ SDL_Window* pWindow = nullptr;
 SDL_Renderer* pRenderer = nullptr;
 SDL_Surface * window_surface = nullptr;
 
-int degrees = 10;
-int offset = 20;
+int degrees = 10; // Usado para o ângulo da roda
+int offset = 20;  // Usado para a posição do Renegade
 
 void display() {
     Color color = Color(0,0,0);

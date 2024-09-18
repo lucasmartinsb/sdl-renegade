@@ -15,8 +15,9 @@ Wheel::~Wheel()
     //dtor
 }
 
-Wheel::Wheel(Point c, int degrees, Color color) {
+Wheel::Wheel(Point c, int radius, int degrees, Color color) {
     this->c = c;
+    this->radius = radius;
     this->degrees = degrees;
     this->color = color;
 }
@@ -50,61 +51,50 @@ double Wheel::toRadians(int degrees) {
 }
 
 void Wheel::draw() {
-    int radius = 30;
+    Line raio1 = this->raio(0);
+    Line raio2 = this->raio(this->toRadians(45));
+    Line raio3 = this->raio(this->toRadians(90));
+    Line raio4 = this->raio(this->toRadians(135));
+    Line raio5 = this->raio(this->toRadians(270));
+
+    Circle circulo = Circle(this->c, this->radius, this->color);
+
+    circulo.draw();
+    raio1.draw();
+    raio2.draw();
+    raio3.draw();
+    raio4.draw();
+    raio5.draw();
+}
+
+Line Wheel::raio(double plusAngle) {
+    // Raio vertical
+    int x1 = this->c.getX() - this->radius;
+    int y1 = this->c.getY();
+
+    int x2 = this->c.getX() + this->radius;
+    int y2 = this->c.getY();
 
     // Coordenadas do centro da linha
     int centerX = this->c.getX();
     int centerY = this->c.getY();
 
-    // Calcular o ângulo em radianos
-    double angle = this->toRadians(this->degrees);
+    // Ângulo em radianos
+    double angle = this->toRadians(this->degrees) + plusAngle;
 
-    // Calcular as extremidades da linha em relação ao centro
-    int x1 = centerX - radius;
-    int y1 = centerY;
-
-    int x2 = centerX + radius;
-    int y2 = centerY;
-
-    // Rotacionar os pontos ao redor do centro usando transformações de rotação
+     // Rotaciona os pontos ao redor do centro usando transformações de rotação
     int rotatedX1 = centerX + (x1 - centerX) * cos(angle) - (y1 - centerY) * sin(angle);
     int rotatedY1 = centerY + (x1 - centerX) * sin(angle) + (y1 - centerY) * cos(angle);
 
     int rotatedX2 = centerX + (x2 - centerX) * cos(angle) - (y2 - centerY) * sin(angle);
     int rotatedY2 = centerY + (x2 - centerX) * sin(angle) + (y2 - centerY) * cos(angle);
 
-    // Criar pontos rotacionados
+    // Pontos rotacionados
     Point p1 = Point(rotatedX1, rotatedY1);
     Point p2 = Point(rotatedX2, rotatedY2);
 
     // Desenhar a linha rotacionada
-    Line raio1 = Line(p1, p2, this->color);
-
-
-    // Calcular as extremidades da linha em relação ao centro
-    int x3 = centerX;
-    int y3 = centerY - radius;
-
-    int x4 = centerX;
-    int y4 = centerY + radius;
-
-    // Rotacionar os pontos ao redor do centro usando transformações de rotação
-    int rotatedX3 = centerX + (x3 - centerX) * cos(angle) - (y3 - centerY) * sin(angle);
-    int rotatedY3 = centerY + (x3 - centerX) * sin(angle) + (y3 - centerY) * cos(angle);
-
-    int rotatedX4 = centerX + (x4 - centerX) * cos(angle) - (y4 - centerY) * sin(angle);
-    int rotatedY4 = centerY + (x4 - centerX) * sin(angle) + (y4 - centerY) * cos(angle);
-
-    // Criar pontos rotacionados
-    Point p3 = Point(rotatedX3, rotatedY3);
-    Point p4 = Point(rotatedX4, rotatedY4);
-
-    // Desenhar a linha rotacionada
-    Line raio2 = Line(p3, p4, this->color);
-
-    Circle circulo = Circle(this->c, radius, this->color);
-
-    circulo.draw();
-    raio1.draw();
-    raio2.draw();
+    Line raio = Line(p1, p2, this->color);
+    
+    return raio;
 }
