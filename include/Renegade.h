@@ -8,8 +8,8 @@ class Renegade
 {
     public:
         Renegade();
-        Renegade(Point start, Color color);
-        Renegade(Point start, Color color, int antialias);
+        Renegade(Point start, int degrees, Color color);
+        Renegade(Point start, int degrees, Color color, int antialias);
         void draw();
         virtual ~Renegade();
 
@@ -17,6 +17,7 @@ class Renegade
 
     private:
         Point start;
+        int degrees;
         Color color;
         int antialias = 0;
 
