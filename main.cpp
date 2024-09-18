@@ -16,39 +16,25 @@ SDL_Renderer* pRenderer = nullptr;
 SDL_Surface * window_surface = nullptr;
 
 int degrees = 10;
-int offset = 10;
+int offset = 20;
 
 void display() {
     Color color = Color(0,0,0);
-    Point p1 = Point(100,100);
+    Point p1 = Point(offset,300);
 
     Renegade renegade = Renegade(p1, degrees, color);
     renegade.draw();
 
+	offset+=5;
 	degrees+=10;
+
+	if(offset==250){
+		offset = 20;
+	}
 
 	if(degrees==360) {
 		degrees = 0;
 	}
-
-	// Color color = Color(255,0,0);
-
-    // Point p1 = Point(600-offset,400);
-    // Point p2 = Point(10+offset,10);
-
-    // Line l1 = Line(p1, p2, color);
-    // l1.draw();
-
-    // Point p3 = Point(600-offset,430);
-    // Point p4 = Point(10+offset,40);
-
-    // offset += 10;
-
-    // if(offset > 500) {
-    //     offset = 0;
-    // }
-
-    // Line l2 = Line(p3, p4, color, 1);
 }
 
 void clear() {
@@ -103,7 +89,7 @@ int main(int argc, char* args[])
         display();
 
         // Aguarda instantes
-        usleep(100000);
+        usleep(60000);
 
 		// Verifica se foi mandado fechar a janela
 		while (SDL_PollEvent(&event))
