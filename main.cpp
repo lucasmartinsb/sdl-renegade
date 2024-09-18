@@ -17,30 +17,9 @@ SDL_Surface * window_surface = nullptr;
 
 int offset = 10;
 
-void display()
-{
+void display() {
 
-    // Color color = Color(255,0,0);
-
-    // Point p1 = Point(600-offset,400);
-    // Point p2 = Point(10+offset,10);
-
-    // Line l1 = Line(p1, p2, color);
-    // l1.draw();
-
-    // Point p3 = Point(600-offset,430);
-    // Point p4 = Point(10+offset,40);
-
-    // offset += 10;
-
-    // if(offset > 500) {
-    //     offset = 0;
-    // }
-
-    // Line l2 = Line(p3, p4, color, 1);
-    // l2.draw();
-
-    Color color = Color(255,0,0);
+    Color color = Color(0,0,0);
     Point p1 = Point(offset,200);
 
     Renegade renegade = Renegade(p1, color);

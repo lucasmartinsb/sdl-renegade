@@ -27,7 +27,7 @@ Renegade::Renegade(Point start, Color color, int antialias) {
 }
 
 void Renegade::draw() {
-    Color color = Color(255,0,0);
+    Color color = this->color;
 
     Point p1 = Point(this->start.getX(), this->start.getY());
     Point p2 = Point(this->start.getX() +400, this->start.getY());
