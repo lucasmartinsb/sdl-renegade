@@ -32,19 +32,21 @@ Renegade::Renegade(Point start, int wheelRotation, Color color, int antialias) {
 void Renegade::draw() {
     Color color = this->color;
 
+    int yAssoalho = this->start.getY()-45;
+
     // Linha para-choque traseiro
-    Point p1Line1 = Point(this->start.getX(), this->start.getY()-45);
-    Point p2Line1 = Point(this->start.getX()+54, this->start.getY()-45);
+    Point p1Line1 = Point(this->start.getX(), yAssoalho);
+    Point p2Line1 = Point(this->start.getX()+54, yAssoalho);
     Line line1 = Line(p1Line1, p2Line1, this->color);
 
     // Linha saia
-    Point p1Line2 = Point(this->start.getX()+106, this->start.getY()-45);
-    Point p2Line2 = Point(this->start.getX()+275, this->start.getY()-45);
+    Point p1Line2 = Point(this->start.getX()+106, yAssoalho);
+    Point p2Line2 = Point(this->start.getX()+275, yAssoalho);
     Line line2 = Line(p1Line2, p2Line2, this->color);
 
     // Linha para-choque dianteiro
-    Point p1Line3 = Point(this->start.getX()+327, this->start.getY()-45);
-    Point p2Line3 = Point(this->start.getX()+381, this->start.getY()-45);
+    Point p1Line3 = Point(this->start.getX()+327, yAssoalho);
+    Point p2Line3 = Point(this->start.getX()+381, yAssoalho);
     Line line3 = Line(p1Line3, p2Line3, this->color);
 
     // Roda traseira
