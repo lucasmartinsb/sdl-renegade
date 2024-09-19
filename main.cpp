@@ -28,7 +28,7 @@ void display() {
     Color color = Color(0, 0, 0);
 
     // Calcula o Y com base na inclinação da rampa
-    int offsetY = renegadeStartY; + (renegadeOffsetX * tan(radians));
+    int offsetY = renegadeStartY + (renegadeOffsetX * tan(radians));
 
     Point p1 = Point(renegadeOffsetX, offsetY);
 
