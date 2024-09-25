@@ -131,14 +131,15 @@ void Renegade::draw() {
     };
 
     std::vector<Point> door1 = {
+        applyRampTransform(Point(xStart + 52, yStart + 65), this->degrees),
+        applyRampTransform(Point(xStart + 52, yStart + 39), this->degrees),
+        applyRampTransform(Point(xStart + 54, yStart + 34), this->degrees),
+        applyRampTransform(Point(xStart + 57, yStart + 29), this->degrees),
+        applyRampTransform(Point(xStart + 57, yStart + 6), this->degrees),
         applyRampTransform(Point(xStart + 57, yStart + 29), this->degrees),
         applyRampTransform(Point(xStart + 54, yStart + 34), this->degrees),
         applyRampTransform(Point(xStart + 52, yStart + 39), this->degrees),
         applyRampTransform(Point(xStart + 52, yStart + 65), this->degrees),
-        applyRampTransform(Point(xStart + 52, yStart + 65), this->degrees),
-        applyRampTransform(Point(xStart + 52, yStart + 39), this->degrees),
-        applyRampTransform(Point(xStart + 54, yStart + 34), this->degrees),
-        applyRampTransform(Point(xStart + 57, yStart + 29), this->degrees)
     };
 
     std::vector<Point> door2 = {
