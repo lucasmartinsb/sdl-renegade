@@ -4,28 +4,32 @@
 #include "Point.h"
 #include <cmath>
 
-Renegade::Renegade() {
-    //ctor
+Renegade::Renegade(Point start, int wheelRotation, int degrees, Color color)
+    : start(start), wheelRotation(wheelRotation), degrees(degrees), color(color), offsetX(40), startY(500),
+      polygonDrawer() {
+    // Construtor
 }
 
 Renegade::~Renegade() {
-    //dtor
+    // Destrutor
 }
 
-Renegade::Renegade(Point start, int wheelRotation, int degrees, Color color) {
-    this->start = start;
-    this->wheelRotation = wheelRotation;
-    this->degrees = degrees;
-    this->color = color;
-    this->antialias = 0;
-}
+void Renegade::moveOnRamp(int rampDegrees) {
+    double radians = rampDegrees * M_PI / 180.0;
 
-Renegade::Renegade(Point start, int wheelRotation, int degrees, Color color, int antialias) {
-    this->start = start;
-    this->wheelRotation = wheelRotation;
-    this->degrees = degrees;
-    this->color = color;
-    this->antialias = antialias;
+    // Y com base na inclinação da rampa
+    int offsetY = startY + (offsetX * tan(radians));
+    this->start = Point(offsetX, offsetY); // Atualiza a posição do Renegade
+
+    this->wheelRotation += 10;
+    this->offsetX += 5;
+
+    if (this->offsetX >= 400) {
+        this->offsetX = 30;
+    }
+    if (this->wheelRotation >= 360) {
+        this->wheelRotation = 0;
+    }
 }
 
 double Renegade::toRadians(int degrees) {
@@ -47,20 +51,6 @@ Point Renegade::applyRampTransform(Point p, int degrees) {
 
     // Transladar de volta
     return Point(newX + this->start.getX(), newY + this->start.getY());
-}
-
-void Renegade::drawPolygon(std::vector<Point> points, Color cor) {
-    if (points.size() < 2) {
-        return;
-    }
-
-    for (size_t i = 0; i < points.size() - 1; ++i) {
-        Line line = Line(points[i], points[i + 1], cor);
-        line.draw();
-    }
-
-    Line closingLine = Line(points.back(), points.front(), cor);
-    closingLine.draw();
 }
 
 
@@ -234,15 +224,16 @@ void Renegade::draw() {
 
     wheel1.draw();
     wheel2.draw();
-    
-    drawPolygon(tailLight, this->color);
-    drawPolygon(carHandle1, this->color);
-    drawPolygon(carHandle2, this->color);
-    drawPolygon(window, this->color);
-    drawPolygon(frontWindow, this->color);
-    drawPolygon(door1, this->color);
-    drawPolygon(door2, this->color);
-    drawPolygon(door3, this->color);
-    drawPolygon(headLight, this->color);
-    drawPolygon(carBody, this->color);
+
+    PolygonDrawer polygon_drawer = PolygonDrawer();
+    polygon_drawer.drawPolygon(tailLight, this->color);
+    polygon_drawer.drawPolygon(carHandle1, this->color);
+    polygon_drawer.drawPolygon(carHandle2, this->color);
+    polygon_drawer.drawPolygon(window, this->color);
+    polygon_drawer.drawPolygon(frontWindow, this->color);
+    polygon_drawer.drawPolygon(door1, this->color);
+    polygon_drawer.drawPolygon(door2, this->color);
+    polygon_drawer.drawPolygon(door3, this->color);
+    polygon_drawer.drawPolygon(headLight, this->color);
+    polygon_drawer.drawPolygon(carBody, this->color);
 }
