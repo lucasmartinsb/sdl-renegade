@@ -57,7 +57,7 @@ void Ramp::draw() {
     double angle = this->toRadians();
 
     // Definir um comprimento arbitrário para a linha
-    int length = 700;
+    int length = 670;
 
     // Calcular as coordenadas do ponto final com base no ângulo
     int xFinal = start.getX() + length * cos(angle);

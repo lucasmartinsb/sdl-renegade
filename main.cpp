@@ -18,7 +18,7 @@ SDL_Renderer* pRenderer = nullptr;
 SDL_Surface * window_surface = nullptr;
 
 int wheelRotation = 10;   // Usado para o ângulo da roda
-int renegadeOffsetX = 20;  // Usado para a posição do Renegade
+int renegadeOffsetX = 40;  // Usado para a posição do Renegade
 int renegadeStartY = 500;  // Posição inicial de Y
 
 void display() {
@@ -35,16 +35,16 @@ void display() {
     Renegade renegade = Renegade(p1, wheelRotation, degrees, color);
     renegade.draw();
 
-    Point pRamp = Point(0, 480);
-    Ramp ramp = Ramp(pRamp, degrees, color);
+    Point pRamp = Point(55, 479);
+    Ramp ramp = Ramp(pRamp, -degrees, color);
     ramp.draw();
 
     renegadeOffsetX += 5;
     wheelRotation += 10;
 
     // Reset de posições para criar um loop
-    if (renegadeOffsetX >= 250) {
-        renegadeOffsetX = 20;
+    if (renegadeOffsetX >= 400) {
+        renegadeOffsetX = 30;
     }
 
     if (wheelRotation >= 360) {

@@ -1,17 +1,14 @@
 #include "Renegade.h"
 #include "Line.h"
-#include "Circle.h"
 #include "Wheel.h"
 #include "Point.h"
-#include "Context.h"
+#include <cmath>
 
-Renegade::Renegade()
-{
+Renegade::Renegade() {
     //ctor
 }
 
-Renegade::~Renegade()
-{
+Renegade::~Renegade() {
     //dtor
 }
 
@@ -52,37 +49,78 @@ Point Renegade::applyRampTransform(Point p, int degrees) {
     return Point(newX + this->start.getX(), newY + this->start.getY());
 }
 
+void Renegade::drawPolygon(std::vector<Point> points, Color cor) {
+    if (points.size() < 2) {
+        return;
+    }
+
+    for (size_t i = 0; i < points.size() - 1; ++i) {
+        Line line = Line(points[i], points[i + 1], cor);
+        line.draw();
+    }
+
+    Line closingLine = Line(points.back(), points.front(), cor);
+    closingLine.draw();
+}
+
+
 void Renegade::draw() {
-    Color color = this->color;
-    int yAssoalho = this->start.getY() - 45;
+    int yAssoalho = this->start.getY() - 100;
 
-    // Linha para-choque traseiro
-    Point p1Line1 = applyRampTransform(Point(this->start.getX(), yAssoalho), this->degrees);
-    Point p2Line1 = applyRampTransform(Point(this->start.getX() + 54, yAssoalho), this->degrees);
-    Line line1 = Line(p1Line1, p2Line1, this->color);
+    std::vector<Point> carBody = {
+        applyRampTransform(Point(this->start.getX() + 16, yAssoalho + 89), this->degrees),
+        applyRampTransform(Point(this->start.getX() + 20, yAssoalho + 89), this->degrees),
+        applyRampTransform(Point(this->start.getX() + 29, yAssoalho + 64), this->degrees),
+        applyRampTransform(Point(this->start.getX() + 61, yAssoalho + 65), this->degrees),
+        applyRampTransform(Point(this->start.getX() + 74, yAssoalho + 92), this->degrees),
+        applyRampTransform(Point(this->start.getX() + 184, yAssoalho + 93), this->degrees),
+        applyRampTransform(Point(this->start.getX() + 194, yAssoalho + 65), this->degrees),
+        applyRampTransform(Point(this->start.getX() + 232, yAssoalho + 65), this->degrees),
+        applyRampTransform(Point(this->start.getX() + 240, yAssoalho + 92), this->degrees),
+        applyRampTransform(Point(this->start.getX() + 248, yAssoalho + 92), this->degrees),
+        applyRampTransform(Point(this->start.getX() + 256, yAssoalho + 86), this->degrees),
+        applyRampTransform(Point(this->start.getX() + 256, yAssoalho + 83), this->degrees),
+        applyRampTransform(Point(this->start.getX() + 265, yAssoalho + 71), this->degrees),
+        applyRampTransform(Point(this->start.getX() + 265, yAssoalho + 67), this->degrees),
+        applyRampTransform(Point(this->start.getX() + 263, yAssoalho + 65), this->degrees),
+        applyRampTransform(Point(this->start.getX() + 263, yAssoalho + 59), this->degrees),
+        applyRampTransform(Point(this->start.getX() + 259, yAssoalho + 56), this->degrees),
+        applyRampTransform(Point(this->start.getX() + 257, yAssoalho + 55), this->degrees),
+        applyRampTransform(Point(this->start.getX() + 257, yAssoalho + 47), this->degrees),
+        applyRampTransform(Point(this->start.getX() + 256, yAssoalho + 44), this->degrees),
+        applyRampTransform(Point(this->start.getX() + 246, yAssoalho + 37), this->degrees),
+        applyRampTransform(Point(this->start.getX() + 227, yAssoalho + 33), this->degrees),
+        applyRampTransform(Point(this->start.getX() + 192, yAssoalho + 29), this->degrees),
+        applyRampTransform(Point(this->start.getX() + 161, yAssoalho + 4), this->degrees),
+        applyRampTransform(Point(this->start.getX() + 125, yAssoalho + 1), this->degrees),
+        applyRampTransform(Point(this->start.getX() + 74, yAssoalho + 0), this->degrees),
+        applyRampTransform(Point(this->start.getX() + 28, yAssoalho + 3), this->degrees),
+        applyRampTransform(Point(this->start.getX() + 17, yAssoalho + 4), this->degrees),
+        applyRampTransform(Point(this->start.getX() + 13, yAssoalho + 4), this->degrees),
+        applyRampTransform(Point(this->start.getX() + 12, yAssoalho + 6), this->degrees),
+        applyRampTransform(Point(this->start.getX() + 16, yAssoalho + 9), this->degrees),
+        applyRampTransform(Point(this->start.getX() + 9, yAssoalho + 28), this->degrees),
+        applyRampTransform(Point(this->start.getX() + 7, yAssoalho + 31), this->degrees),
+        applyRampTransform(Point(this->start.getX() + 6, yAssoalho + 35), this->degrees),
+        applyRampTransform(Point(this->start.getX() + 6, yAssoalho + 47), this->degrees),
+        applyRampTransform(Point(this->start.getX() + 5, yAssoalho + 47), this->degrees),
+        applyRampTransform(Point(this->start.getX() + 5, yAssoalho + 52), this->degrees),
+        applyRampTransform(Point(this->start.getX() + 3, yAssoalho + 63), this->degrees),
+        applyRampTransform(Point(this->start.getX() + 1, yAssoalho + 65), this->degrees),
+        applyRampTransform(Point(this->start.getX() + 2, yAssoalho + 77), this->degrees),
+        applyRampTransform(Point(this->start.getX() + 10, yAssoalho + 87), this->degrees),
+        applyRampTransform(Point(this->start.getX() + 16, yAssoalho + 89), this->degrees),
+        applyRampTransform(Point(this->start.getX() + 16, yAssoalho + 89), this->degrees)
+    };
 
-    // Linha saia
-    Point p1Line2 = applyRampTransform(Point(this->start.getX() + 106, yAssoalho), this->degrees);
-    Point p2Line2 = applyRampTransform(Point(this->start.getX() + 275, yAssoalho), this->degrees);
-    Line line2 = Line(p1Line2, p2Line2, this->color);
+    drawPolygon(carBody, this->color);
 
-    // Linha para-choque dianteiro
-    Point p1Line3 = applyRampTransform(Point(this->start.getX() + 326, yAssoalho), this->degrees);
-    Point p2Line3 = applyRampTransform(Point(this->start.getX() + 380, yAssoalho), this->degrees);
-    Line line3 = Line(p1Line3, p2Line3, this->color);
+    Point pCenterWheel1 = applyRampTransform(Point(this->start.getX() + 46, this->start.getY() - 10), this->degrees);
+    Wheel wheel1 = Wheel(pCenterWheel1, 22, this->wheelRotation, this->color); // Roda traseira
 
-    // Roda traseira
-    Point pCenterWheel1 = applyRampTransform(Point(this->start.getX() + 80, this->start.getY() - 30), this->degrees);
-    Wheel wheel1 = Wheel(pCenterWheel1, 30, this->wheelRotation, this->color);
+    Point pCenterWheel2 = applyRampTransform(Point(this->start.getX() + 213, this->start.getY() - 10), this->degrees);
+    Wheel wheel2 = Wheel(pCenterWheel2, 22, this->wheelRotation, this->color); // Roda dianteira
 
-    // Roda dianteira
-    Point pCenterWheel2 = applyRampTransform(Point(this->start.getX() + 300, this->start.getY() - 30), this->degrees);
-    Wheel wheel2 = Wheel(pCenterWheel2, 30, this->wheelRotation, this->color);
-
-    // Desenhar as rodas e linhas
     wheel1.draw();
     wheel2.draw();
-    line1.draw();
-    line2.draw();
-    line3.draw();
 }
